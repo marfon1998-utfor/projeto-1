@@ -1,46 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>Faça login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="cabecalho">
-        <a href="#">
-            <img src="teste.webp"  class="logotipo">
-        </a>
+  <div class="app-shell">
+    <header class="cabecalho" id="login-header">
+      <a href="#login-stage" aria-label="Início"><img src="teste.webp" class="logotipo" alt="Amazon"></a>
     </header>
 
-    <div class="bloco-central">
-        <div class="caixa-login">
-            <h1>Faça login ou crie uma conta</h1>
-            <div class="campo">
-                <label for="identificacao">E-mail ou número de telefone celular</label>
-                <input type="text" id="identificacao" name="identificacao" autocomplete="username">
-                <button  class="botao-primario">Continuar</button>
-            </div>
-            <p class="termos">
-                Ao continuar, você concorda com as <a href="#">Condições de Uso</a> e a <a href="#">Notificação de Privacidade</a> da Amazon.
-            </p>
-            <div class="link-ajuda">
-                <a href="#">Precisa de ajuda?</a>
-            </div>
-        </div>
-       
-    </div>
+    <header class="topbar is-hidden" id="store-header">
+      <a class="brand" href="#catalogo" aria-label="Amazon, início"><span>amazon</span><i>⌣</i></a>
+      <div class="delivery"><span class="pin">⌖</span><span><small>Enviar para</small><strong>Brasil</strong></span></div>
+      <form class="search" id="search-form" role="search"><label class="sr-only" for="search-input">Buscar produtos</label><select id="search-category" aria-label="Categoria"><option value="all">Todos</option></select><input id="search-input" placeholder="Pesquisar Amazon.com.br"><button aria-label="Buscar">⌕</button></form>
+      <div class="account-label" id="account-label"><small>Olá</small><strong>Sua conta</strong></div>
+      <button class="cart" id="cart-button" aria-label="Carrinho, 0 itens"><span>🛒</span><b id="cart-count">0</b><strong>Carrinho</strong></button>
+    </header>
+    <nav class="subnav is-hidden" id="store-nav" aria-label="Navegação principal"><button type="button"><span>☰</span> Todas</button><a href="#ofertas">Ofertas do Dia</a><button type="button" class="nav-tab" id="favorites-tab" aria-pressed="false">♡ Favoritos <span id="favorites-count">0</span></button><a href="#catalogo">Mais Vendidos</a><a href="#catalogo">Atendimento ao Cliente</a><a href="#catalogo">Eletrônicos</a><a href="#catalogo">Ideias para presente</a><span class="nav-promo">Ofertas para você</span></nav>
 
-    <footer class="rodape">
-        <div class="links-rodape">
-            <a href="#">Condições de Uso</a>
-            <a href="#">Notificação de Privacidade</a>
-            <a href="#">Ajuda</a>
-            <a href="#">Cookies</a>
-            <a href="#">Anuncios Baseados em Interesses</a>
-        </div>
-        <p class="direitos-autorais">&copy; 1996-2026, Amazon.com, Inc. ou suas afiliadas</p>
+    <main>
+      <div class="bloco-central login-stage" id="login-stage">
+        <section class="caixa-login" aria-labelledby="login-title">
+          <h1 id="login-title">Faça login ou crie uma conta</h1>
+          <form id="login-form">
+            <div class="campo">
+              <label for="username">E-mail ou nome de usuário</label>
+              <input type="text" id="username" name="username" autocomplete="username" placeholder="mor_2314" required>
+              <div class="password-stage is-hidden" id="password-stage">
+                <label for="password">Senha</label>
+                <div class="password-wrap"><input type="password" id="password" name="password" autocomplete="current-password" placeholder="Digite sua senha"><button type="button" id="toggle-password" aria-label="Mostrar senha">◉</button></div>
+                <p class="demo-credentials">Acesso de demonstração: <code>mor_2314</code> / <code>83r5^_</code></p>
+              </div>
+              <button type="submit" class="botao-primario" id="login-button">Continuar</button>
+              <p class="form-message" id="login-message" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+          <p class="termos">Ao continuar, você concorda com as <a href="#">Condições de Uso</a> e a <a href="#">Notificação de Privacidade</a> da Amazon.</p>
+          <div class="link-ajuda"><a href="#">Precisa de ajuda?</a></div>
+        </section>
+      </div>
+
+      <section class="catalog-stage is-hidden" id="catalog-stage" aria-labelledby="catalog-title">
+        <div class="welcome-banner"><div><p class="eyebrow">BEM-VINDO À AMAZON</p><h1 id="catalog-title">Um mundo de descobertas.</h1><p>Encontre seu próximo favorito entre produtos escolhidos para você.</p></div><div class="banner-art" aria-hidden="true"><span>✦</span><span>📦</span><i></i></div></div>
+        <div class="catalog-heading" id="ofertas"><div><p class="eyebrow">SELEÇÃO DA LOJA</p><h2 id="section-title">Explore nossos produtos</h2><p class="catalog-subtitle" id="results-count">Carregando produtos...</p><p class="form-message" id="search-message" role="alert"></p></div><div class="catalog-actions"><label class="sr-only" for="category-filter">Filtrar categoria</label><select id="category-filter"><option value="all">Todas as categorias</option></select><button id="logout-button" class="logout-button" type="button">Sair da conta</button></div></div>
+        <div class="product-grid" id="product-grid" aria-live="polite"></div>
+        <div class="catalog-error is-hidden" id="catalog-error"><p>Não foi possível carregar os produtos agora.</p><button id="retry-button" class="guest-button" type="button">Tentar novamente</button></div>
+        <p class="api-caption">Vitrine demonstrativa com dados públicos de produtos.</p>
+      </section>
+    </main>
+
+    <footer class="rodape" id="site-footer">
+      <div class="links-rodape"><a href="#">Condições de Uso</a><a href="#">Notificação de Privacidade</a><a href="#">Ajuda</a><a href="#">Cookies</a><a href="#">Anúncios Baseados em Interesses</a></div>
+      <p class="direitos-autorais">&copy; 1996-2026, Amazon.com, Inc. ou suas afiliadas</p>
     </footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+  <script src="app.js" defer></script>
 </body>
 </html>
- 
-<!-- *Marcelo e Gregório -->
